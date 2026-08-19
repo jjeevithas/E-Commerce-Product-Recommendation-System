@@ -1,8 +1,8 @@
 # 🛍️ E-Commerce Product Recommendation System
 
-A machine learning project I built to recommend products based on user interactions and product information.
+An e-commerce analytics and machine learning project that analyzes user interactions and product information to generate personalized product recommendations.
 
-The system combines different recommendation techniques to suggest products that are more relevant to each user.
+The project uses user behavior such as views, cart events, and purchases to understand product preferences and generate relevant recommendations.
 
 ## 🚀 Live Demo
 
@@ -10,16 +10,29 @@ The system combines different recommendation techniques to suggest products that
 
 ## 🎯 Project Goal
 
-The main goal of this project is to build a recommendation system that can suggest products based on user behavior and product details.
+The main goal of this project is to analyze e-commerce user behavior and build a recommendation system that suggests relevant products to users.
 
-The project uses:
+The project combines data analysis, recommendation techniques, and machine learning.
+
+It uses:
 
 * Collaborative Filtering
 * Matrix Factorization using TruncatedSVD
 * Content-Based Filtering using TF-IDF and Cosine Similarity
 * Hybrid recommendation scoring
-* Streamlit for the web application
-* Time-based evaluation using Precision@K, Recall@K, and NDCG@K
+* Streamlit for the interactive web application
+* Time-based evaluation using Precision@10, Recall@10, and NDCG@10
+
+## 🛠️ Technology Stack
+
+* **Python** — application development and data analysis
+* **Pandas** — data processing and analysis
+* **Scikit-learn** — machine learning algorithms
+* **TruncatedSVD** — matrix factorization
+* **TF-IDF** — product feature representation
+* **Cosine Similarity** — product similarity
+* **Streamlit** — interactive web application
+* **CSV** — dataset storage
 
 ## 📂 Project Structure
 
@@ -79,74 +92,101 @@ The Streamlit application will open in your browser.
 
 ## 🧠 How the Recommendation System Works
 
-### Collaborative Filtering
+### 1. User Behavior Analysis
 
-The system creates a user-product interaction matrix based on user activities.
+The system uses user-product interaction data to understand how users interact with products.
 
-Different actions are given different weights:
+The main interaction types are:
+
+* View
+* Cart
+* Purchase
+
+Different weights are assigned to these actions:
 
 * View = 1
 * Cart = 3
 * Purchase = 5
 
-This gives more importance to stronger user actions, such as adding a product to the cart or purchasing it.
+This gives more importance to stronger actions, such as adding a product to the cart or purchasing it.
 
-**TruncatedSVD** is then used to reduce the interaction matrix and learn hidden patterns between users and products.
+### 2. Collaborative Filtering
 
-### Content-Based Filtering
+A user-product interaction matrix is created from the weighted user activities.
 
-The system also uses information about each product, including:
+**TruncatedSVD** is then applied to the interaction matrix to reduce its dimensions and identify hidden patterns between users and products.
+
+This helps recommend products based on similar user behavior.
+
+### 3. Content-Based Filtering
+
+The system also uses product information such as:
 
 * Category
 * Subcategory
 * Brand
 * Description
 
-This information is converted into **TF-IDF vectors**, and **cosine similarity** is used to find products with similar characteristics.
+This information is converted into **TF-IDF vectors**.
 
-### 🔄 Hybrid Recommendation
+**Cosine similarity** is then used to find products that are similar based on their characteristics.
 
-The final recommendation combines both approaches:
+### 4. Hybrid Recommendation
+
+The final recommendation combines collaborative filtering and content-based filtering:
 
 ```text
 Final Score = alpha × Collaborative Score
             + (1 - alpha) × Content Score
 ```
 
-The Streamlit application allows the collaborative filtering weight to be adjusted, so the recommendations can be changed between behavior-based and content-based results.
+The Streamlit application allows the collaborative filtering weight to be adjusted, which changes the balance between user-behavior-based and content-based recommendations.
 
 ## 📊 Model Evaluation
 
-I used a **time-based train/test split** to evaluate the recommendation system and reduce the risk of data leakage.
+To evaluate the recommendation system, I used a **time-based train/test split**.
+
+This is important because using future interactions during training can lead to data leakage.
 
 For each user:
 
-1. Interactions are sorted by time.
-2. Older interactions are used for training.
+1. Interactions are sorted by timestamp.
+2. Earlier interactions are used for training.
 3. The latest interactions are kept for testing.
-4. The model is trained only using the training data.
-5. Recommendations are generated.
+4. The recommendation model is trained using only the training data.
+5. Recommendations are generated for the users.
 6. The recommendations are compared with the held-out test products.
 
-The model is evaluated using:
+The system is evaluated using:
 
 * **Precision@10**
 * **Recall@10**
 * **NDCG@10**
 
-This approach makes the evaluation more realistic because future interactions are not used during training.
+These metrics help measure how relevant the recommended products are and how well the system ranks the products.
 
 ## 📁 Dataset
 
-The project uses a synthetic dataset containing:
+The project uses a synthetic e-commerce dataset containing:
 
 * 80 users
 * Multiple product categories
-* Product details and metadata
+* Product information and metadata
 * Timestamped user interactions
 * View, cart, and purchase events
 
-The CSV files can be replaced with a larger real-world dataset in the future.
+The dataset is mainly used for demonstrating the recommendation workflow and can be replaced with a larger real-world dataset in the future.
+
+## 💡 What the Project Demonstrates
+
+This project demonstrates how e-commerce interaction data can be used to:
+
+* Understand user product preferences
+* Analyze different types of user interactions
+* Identify relationships between users and products
+* Find similar products
+* Generate personalized recommendations
+* Evaluate recommendation quality using standard metrics
 
 ## 🔮 Future Improvements
 
@@ -158,10 +198,10 @@ Some improvements I would like to add later:
 * Improve recommendation ranking
 * Add user authentication
 * Store user interactions in a database
-* Add more features to the deployed application
+* Add more interactive analytics to the Streamlit application
 
 ## 👩‍💻 Author
 
 **Jeevitha S**
 
-Developed a machine learning-based product recommendation system using **Python, Scikit-learn, and Streamlit**, combining user behavior and product information to generate relevant recommendations.
+Developed an e-commerce analytics and machine learning project using **Python, Pandas, Scikit-learn, and Streamlit** to analyze user behavior and generate personalized product recommendations.

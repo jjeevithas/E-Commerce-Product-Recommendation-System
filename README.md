@@ -6,7 +6,7 @@ The system combines different recommendation techniques to suggest products that
 
 ## 🚀 Live Demo
 
-👉 [View the live recommendation system](YOUR_ACTUAL_STREAMLIT_URL)
+👉 [View the live recommendation system](https://e-commerce-appuct-recommendation-system-fpg7bmfe2vsuewbxhkkjct.streamlit.app/)
 
 ## 🎯 Project Goal
 

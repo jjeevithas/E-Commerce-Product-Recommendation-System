@@ -1,19 +1,27 @@
 # 🛍️ E-Commerce Product Recommendation System
 
-A portfolio-ready machine learning project that recommends products based on user behavior and product information.
+A machine learning project I built to recommend products based on user interactions and product information.
 
-## Project Goal
+The system combines different recommendation techniques to suggest products that are more relevant to each user.
 
-Build a recommendation system that suggests relevant products using:
+## 🚀 Live Demo
 
-- Collaborative Filtering
-- Matrix Factorization using TruncatedSVD
-- Content-Based Filtering using TF-IDF and Cosine Similarity
-- Hybrid recommendation scoring
-- Streamlit web application
-- Correct time-based evaluation using Precision@K, Recall@K and NDCG@K
+👉 [View the live recommendation system](YOUR_ACTUAL_STREAMLIT_URL)
 
-## Project Structure
+## 🎯 Project Goal
+
+The main goal of this project is to build a recommendation system that can suggest products based on user behavior and product details.
+
+The project uses:
+
+* Collaborative Filtering
+* Matrix Factorization using TruncatedSVD
+* Content-Based Filtering using TF-IDF and Cosine Similarity
+* Hybrid recommendation scoring
+* Streamlit for the web application
+* Time-based evaluation using Precision@K, Recall@K, and NDCG@K
+
+## 📂 Project Structure
 
 ```text
 Ecommerce_Product_Recommendation_System_Corrected/
@@ -35,7 +43,7 @@ Ecommerce_Product_Recommendation_System_Corrected/
     └── analysis.py
 ```
 
-## Installation
+## ⚙️ Installation
 
 ### 1. Open the project folder
 
@@ -49,13 +57,13 @@ cd Ecommerce_Product_Recommendation_System_Corrected
 python -m venv venv
 ```
 
-Windows:
+For Windows:
 
 ```bash
 venv\Scripts\activate
 ```
 
-### 3. Install packages
+### 3. Install the required packages
 
 ```bash
 pip install -r requirements.txt
@@ -67,70 +75,98 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-## How the Model Works
+The Streamlit application will open in your browser.
+
+## 🧠 How the Recommendation System Works
 
 ### Collaborative Filtering
 
-A user-product interaction matrix is created from views, cart events and purchases.
+First, the system creates a user-product interaction matrix using the user's activities.
 
-Weights:
+Different actions are given different weights:
 
-- View = 1
-- Cart = 3
-- Purchase = 5
+* View = 1
+* Cart = 3
+* Purchase = 5
 
-TruncatedSVD performs matrix factorization to learn latent user and product patterns.
+This helps give more importance to stronger user actions, such as adding a product to the cart or purchasing it.
+
+I then use **TruncatedSVD** to reduce the interaction matrix and learn hidden patterns between users and products.
 
 ### Content-Based Filtering
 
-Product category, subcategory, brand and description are converted into TF-IDF vectors. Cosine similarity finds products with similar content.
+The system also looks at the information available for each product.
 
-### Hybrid Recommendation
+It uses:
 
-The final score is:
+* Category
+* Subcategory
+* Brand
+* Description
+
+This information is converted into **TF-IDF vectors**, and **cosine similarity** is used to find products with similar characteristics.
+
+### 🔄 Hybrid Recommendation
+
+The final recommendation combines both approaches:
 
 ```text
 Final Score = alpha × Collaborative Score
             + (1 - alpha) × Content Score
 ```
 
-The Streamlit sidebar allows the collaborative weight to be adjusted.
+The Streamlit application allows the collaborative filtering weight to be adjusted, so the recommendation can be changed between behavior-based and content-based results.
 
-## Correct Evaluation Method
+## 📊 Model Evaluation
 
-The previous version had a data leakage problem. This version fixes it.
+I used a **time-based train/test split** to evaluate the recommendation system and avoid data leakage.
 
 For each user:
 
-1. Sort interactions by time.
-2. Keep earlier interactions for training.
-3. Hold out the newest interactions for testing.
-4. Train the model only on training data.
-5. Generate recommendations.
-6. Compare recommendations against held-out test products.
+1. Interactions are sorted by time.
+2. Older interactions are used for training.
+3. The latest interactions are kept for testing.
+4. The model is trained only using the training data.
+5. Recommendations are generated for the users.
+6. The recommendations are compared with the held-out test products.
 
-Metrics:
+The model is evaluated using:
 
-- Precision@10
-- Recall@10
-- NDCG@10
+* **Precision@10**
+* **Recall@10**
+* **NDCG@10**
 
-This prevents the test products from being included in the user's training history.
+This approach makes the evaluation more realistic because future interactions are not used while training the model.
 
-## Dataset
+## 📁 Dataset
 
-The project includes a synthetic dataset with:
+The project uses a synthetic dataset containing:
 
-- 80 users
-- Multiple product categories
-- Product metadata
-- Hundreds of timestamped interactions
-- View, cart and purchase events
+* 80 users
+* Multiple product categories
+* Product details and metadata
+* Timestamped user interactions
+* View, cart, and purchase events
 
-You can later replace the CSV files with a larger real-world dataset.
+The CSV files can be replaced with a larger real-world dataset in the future.
 
-## Resume Description
+## 🔮 Future Improvements
 
-**E-Commerce Product Recommendation System | Python, Scikit-learn, Streamlit**
+Some improvements I would like to add later:
 
-Developed a hybrid product recommendation system using collaborative filtering, TruncatedSVD matrix factorization, and TF-IDF content-based filtering. Built an interactive Streamlit dashboard for personalized and similar-product recommendations and evaluated the model using time-based train/test splitting with Precision@K, Recall@K, and NDCG@K.
+* Use a larger real-world e-commerce dataset
+* Add more user and product features
+* Experiment with deep learning recommendation models
+* Improve recommendation ranking
+* Add user authentication
+* Store user interactions in a database
+* Deploy the application online
+
+  ## 👩‍💻 Author
+
+**Jeevitha S**
+
+Developed a machine learning-based product recommendation system using **Python, Scikit-learn, and Streamlit**, combining user behavior and product information to generate relevant recommendations.
+
+
+Precision@10, Recall@10, and NDCG@10.

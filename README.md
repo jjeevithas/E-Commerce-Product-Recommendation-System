@@ -81,7 +81,7 @@ The Streamlit application will open in your browser.
 
 ### Collaborative Filtering
 
-First, the system creates a user-product interaction matrix using the user's activities.
+The system creates a user-product interaction matrix based on user activities.
 
 Different actions are given different weights:
 
@@ -89,15 +89,13 @@ Different actions are given different weights:
 * Cart = 3
 * Purchase = 5
 
-This helps give more importance to stronger user actions, such as adding a product to the cart or purchasing it.
+This gives more importance to stronger user actions, such as adding a product to the cart or purchasing it.
 
-I then use **TruncatedSVD** to reduce the interaction matrix and learn hidden patterns between users and products.
+**TruncatedSVD** is then used to reduce the interaction matrix and learn hidden patterns between users and products.
 
 ### Content-Based Filtering
 
-The system also looks at the information available for each product.
-
-It uses:
+The system also uses information about each product, including:
 
 * Category
 * Subcategory
@@ -115,11 +113,11 @@ Final Score = alpha × Collaborative Score
             + (1 - alpha) × Content Score
 ```
 
-The Streamlit application allows the collaborative filtering weight to be adjusted, so the recommendation can be changed between behavior-based and content-based results.
+The Streamlit application allows the collaborative filtering weight to be adjusted, so the recommendations can be changed between behavior-based and content-based results.
 
 ## 📊 Model Evaluation
 
-I used a **time-based train/test split** to evaluate the recommendation system and avoid data leakage.
+I used a **time-based train/test split** to evaluate the recommendation system and reduce the risk of data leakage.
 
 For each user:
 
@@ -127,7 +125,7 @@ For each user:
 2. Older interactions are used for training.
 3. The latest interactions are kept for testing.
 4. The model is trained only using the training data.
-5. Recommendations are generated for the users.
+5. Recommendations are generated.
 6. The recommendations are compared with the held-out test products.
 
 The model is evaluated using:
@@ -136,7 +134,7 @@ The model is evaluated using:
 * **Recall@10**
 * **NDCG@10**
 
-This approach makes the evaluation more realistic because future interactions are not used while training the model.
+This approach makes the evaluation more realistic because future interactions are not used during training.
 
 ## 📁 Dataset
 
@@ -160,13 +158,10 @@ Some improvements I would like to add later:
 * Improve recommendation ranking
 * Add user authentication
 * Store user interactions in a database
-* Deploy the application online
+* Add more features to the deployed application
 
-  ## 👩‍💻 Author
+## 👩‍💻 Author
 
 **Jeevitha S**
 
 Developed a machine learning-based product recommendation system using **Python, Scikit-learn, and Streamlit**, combining user behavior and product information to generate relevant recommendations.
-
-
-Precision@10, Recall@10, and NDCG@10.
